@@ -15,7 +15,13 @@ function draw() {
 
 function drawCircleNoise() {
 
-
+    //Tekent de sterren.
+    for (let i = 0; i <= 150; i++) {
+        let x_star = Math.random() * width + 35;
+        let y_star = Math.random() * height + 35;
+        context.fillStyle = "white";
+        Utils.fillCircle(x_star, y_star, 2);
+    }
 
     // Zorgt voor cirkels die naast elkaar getekend worden. Moet het noorderlicht voorstellen.
     for (let i = 0; i < width; i++) {
