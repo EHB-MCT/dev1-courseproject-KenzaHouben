@@ -10,58 +10,39 @@ draw();
 function draw() {
     // Zorgt voor zwarte achtergrond achter Noise
     context.fillRect(0, 0, width, height);
-    drawNoise();
+    drawCircleNoise();
 }
 
-function drawNoise() {
+function drawCircleNoise() {
 
+
+
+    // Zorgt voor cirkels die naast elkaar getekend worden. Moet het noorderlicht voorstellen.
     for (let i = 0; i < width; i++) {
-        context.fillStyle = "orange";
-        let y = Noise.perlinNoise(i / 250) * 400 + 10;
+        context.fillStyle = context.fillStyle = Utils.hsla(Math.random() * 30 - i, 100, 50, 100);
+        let y = Noise.perlinNoise(i / 600) * 400 + 110;
+        Utils.fillAndStrokeCircle(i, y, 80, height);
+    }
+
+    // Zorgt voor de golven van de oceaan.
+    // First golf
+    for (let i = 0; i < width; i++) {
+        context.fillStyle = context.fillStyle = "#7fcdff";
+        let y = Noise.perlinNoise(i / 600) * 400 + 510;
         context.fillRect(i, y, 10, height);
     }
 
-    for (let i = 0; i < height; i++) {
-        context.fillStyle = "red";
-        let y = Noise.perlinNoise(i / 250) * 400 + 110;
-        context.fillRect(i, y, 10, width);
-    }
-
+    // Second golf
     for (let i = 0; i < width; i++) {
-        context.fillStyle = "green";
-        let y = Noise.perlinNoise(i / 250) * 400 + 210;
+        context.fillStyle = " #76b6c4";
+        let y = Noise.perlinNoise(i / 600) * 400 + 610;
         context.fillRect(i, y, 10, height);
     }
 
+    // Third golf
     for (let i = 0; i < width; i++) {
-        context.fillStyle = "blue";
-        let y = Noise.perlinNoise(i / 250) * 400 + 310;
+        context.fillStyle = " 	#1da2d8";
+        let y = Noise.perlinNoise(i / 600) * 400 + 710;
         context.fillRect(i, y, 10, height);
     }
-
-    for (let i = 0; i < width; i++) {
-        context.fillStyle = "yellow";
-        let y = Noise.perlinNoise(i / 250) * 400 + 410;
-        context.fillRect(i, y, 10, height);
-    }
-
-    for (let i = 0; i < width; i++) {
-        context.fillStyle = "yellow";
-        let y = Noise.perlinNoise(i / 250) * 400 + 510;
-        context.fillRect(i, y, 10, height);
-    }
-
-    for (let i = 0; i < width; i++) {
-        context.fillStyle = "pink";
-        let y = Noise.perlinNoise(i / 250) * 400 + 610;
-        context.fillRect(i, y, 10, height);
-    }
-
-    for (let i = 0; i < width; i++) {
-        context.fillStyle = "purple";
-        let y = Noise.perlinNoise(i / 250) * 400 + 710;
-        context.fillRect(i, y, 10, height);
-    }
-
 }
-// context.fillStyle = Utils.hsla(Math.random() * 360 - i, 100, 50, 60);
