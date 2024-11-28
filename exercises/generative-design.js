@@ -7,11 +7,14 @@ let width = context.canvas.width;
 let height = context.canvas.height;
 
 
+
+
 draw();
-function draw(width, height) {
+function draw() {
     // Zorgt voor zwarte achtergrond achter Noise
     context.fillRect(0, 0, width, height);
-    drawCircleNoise();
+    drawNoorderlicht();
+    drawGolven();
 }
 
 function drawStar(x_star, y_star, size, hue) {
@@ -21,7 +24,7 @@ function drawStar(x_star, y_star, size, hue) {
 
 
 
-function drawCircleNoise() {
+function drawNoorderlicht() {
 
     //Tekent de sterren.
     for (let i = 0; i <= 150; i++) {
@@ -39,6 +42,9 @@ function drawCircleNoise() {
         Utils.fillAndStrokeCircle(i, y, 80, height);
     }
 
+}
+
+function drawGolven() {
     // Zorgt voor de golven van de oceaan.
     // First golf
     for (let i = 0; i < width; i++) {
@@ -61,8 +67,6 @@ function drawCircleNoise() {
         context.fillRect(i, y, 10, height);
     }
 }
-
-
 
 // window.onload
 // parameters moeten erbij
