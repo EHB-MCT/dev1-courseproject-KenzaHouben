@@ -10,14 +10,17 @@ let height = context.canvas.height;
 draw();
 function draw() {
     // Zorgt voor zwarte achtergrond achter Noise
+
     context.fillRect(0, 0, width, height);
     drawCircleNoise();
 }
 
-function drawStar(x,y,size,hue){
+function drawStar(x_star, y_star, size, hue) {
 
 
 }
+
+
 
 function drawCircleNoise() {
 
@@ -27,7 +30,7 @@ function drawCircleNoise() {
         let y_star = Math.random() * height + 35;
         context.fillStyle = "white";
         Utils.fillCircle(x_star, y_star, 2);
-        drawStar(x_star, y_star, 20,40);
+        drawStar(x_star, y_star, 20, 40);
     }
 
     // Zorgt voor cirkels die naast elkaar getekend worden. Moet het noorderlicht voorstellen.
@@ -59,6 +62,8 @@ function drawCircleNoise() {
         context.fillRect(i, y, 10, height);
     }
 }
+
+
 
 // window.onload
 // parameters moeten erbij
