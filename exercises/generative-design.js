@@ -8,7 +8,7 @@ let height = context.canvas.height;
 
 
 draw();
-function draw() {
+function draw(width, height) {
     // Zorgt voor zwarte achtergrond achter Noise
 
     context.fillRect(0, 0, width, height);
