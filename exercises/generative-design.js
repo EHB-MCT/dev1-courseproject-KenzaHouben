@@ -6,15 +6,15 @@ import * as Noise from "../../scripts/noise.js";
 let width = context.canvas.width;
 let height = context.canvas.height;
 
+update();
 
+drawRect();
+function drawRect() {
 
-
-draw();
-function draw() {
     // Zorgt voor zwarte achtergrond achter Noise
+    context.fillStyle = "black";
     context.fillRect(0, 0, width, height);
-    drawNoorderlicht();
-    drawGolven();
+
 }
 
 function drawStar(x_star, y_star, size, hue) {
@@ -22,8 +22,7 @@ function drawStar(x_star, y_star, size, hue) {
 
 }
 
-
-
+drawNoorderlicht();
 function drawNoorderlicht() {
 
     //Tekent de sterren.
@@ -44,6 +43,7 @@ function drawNoorderlicht() {
 
 }
 
+drawGolven();
 function drawGolven() {
     // Zorgt voor de golven van de oceaan.
     // First golf
@@ -66,7 +66,15 @@ function drawGolven() {
         let y = Noise.perlinNoise(i / 600) * 400 + 710;
         context.fillRect(i, y, 10, height);
     }
+
+
+}
+
+function update() {
+    drawRect();
+    requestAnimationFrame(drawGolven);
 }
 
 // window.onload
 // parameters moeten erbij
+
