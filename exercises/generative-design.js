@@ -43,7 +43,8 @@ drawNoorderlicht();
 function drawNoorderlicht() {
     // Zorgt voor cirkels die naast elkaar getekend worden. Moet het noorderlicht voorstellen.
     for (let i = 0; i < width + 80; i++) {
-        context.fillStyle = context.fillStyle = Utils.hsla(Math.random() * 30 - i, 100, 50, 100);
+        context.strokeStyle = "black";
+        context.fillStyle = Utils.hsla(Math.random() * 30 - i, 100, 50, 100);
         let y = Noise.perlinNoise(i / 600) * 400 + 110;
         Utils.fillAndStrokeCircle(i, y, 80, height);
     }
