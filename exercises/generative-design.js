@@ -14,7 +14,6 @@ update();
 
 drawRect();
 function drawRect() {
-
     // Zorgt voor zwarte achtergrond achter Noise
     context.fillStyle = "black";
     context.fillRect(0, 0, width, height);
@@ -28,7 +27,6 @@ function drawStar(x_star, y_star, size, hue) {
 
 drawNoorderlicht();
 function drawNoorderlicht() {
-
     //Tekent de sterren.
     for (let i = 0; i <= 150; i++) {
         let x_star = Math.random() * width + 35;
@@ -60,7 +58,7 @@ function drawGolven() {
     // Second golf
     for (let i = 0; i < width; i++) {
         context.fillStyle = " #76b6c4";
-        let y = Noise.perlinNoise(i / 600 + golf2 + 200) * 400 + 610;
+        let y = Noise.perlinNoise(i / 600 + golf2) * 400 + 610;
         context.fillRect(i, y, 10, height);
     }
 
