@@ -94,6 +94,8 @@ function update() {
     // Tekent telkens de sterren op een willekeurig plek
     for (let i = 0; i < 50; i++) {
         drawStar(xPositions[i], yPositions[i], starSize[i]);
+        // xPositions[i] += Utils.randomNumber();
+        // yPositions[i] += Utils.randomNumber();
     }
 
     // Tekent telkens het noorderlicht
@@ -110,5 +112,4 @@ function update() {
 }
 
 // window.onload
-// parameters moeten erbij
-
+// vragen wat er bedoeld wordt met signature
