@@ -6,6 +6,8 @@ import * as Noise from "../../scripts/noise.js";
 let width = context.canvas.width;
 let height = context.canvas.height;
 
+let golf = 0;
+
 update();
 
 drawRect();
@@ -49,14 +51,14 @@ function drawGolven() {
     // First golf
     for (let i = 0; i < width; i++) {
         context.fillStyle = context.fillStyle = "#7fcdff";
-        let y = Noise.perlinNoise(i / 600) * 400 + 510;
+        let y = Noise.perlinNoise(i / 600 + golf) * 400 + 510;
         context.fillRect(i, y, 10, height);
     }
 
     // Second golf
     for (let i = 0; i < width; i++) {
         context.fillStyle = " #76b6c4";
-        let y = Noise.perlinNoise(i / 600) * 400 + 610;
+        let y = Noise.perlinNoise(i / 600 + golf + 100) * 400 + 610;
         context.fillRect(i, y, 10, height);
     }
 
@@ -72,7 +74,10 @@ function drawGolven() {
 
 function update() {
     drawRect();
-    requestAnimationFrame(drawGolven);
+    drawNoorderlicht();
+    drawGolven();
+    golf1 += 0.1;
+    requestAnimationFrame(update);
 }
 
 // window.onload

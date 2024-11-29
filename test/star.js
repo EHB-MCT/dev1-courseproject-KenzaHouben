@@ -2,9 +2,9 @@
 import context from "../../scripts/context.js";
 import * as Utils from "../../scripts/utils.js";
 
-drawStar();
+drawStar(100, 200);
 
-function drawStar(x, y) {
+function drawStar(x, y, size) {
     // context.fillStyle = Utils.hsl(hue, 50, 50);
     context.fillStyle = "yellow";
     context.beginPath();
