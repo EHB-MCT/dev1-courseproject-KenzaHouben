@@ -6,10 +6,15 @@ import * as Noise from "../../scripts/noise.js";
 let width = context.canvas.width;
 let height = context.canvas.height;
 
+let xPositions = [];
+let yPositions = [];
+let starSize = [];
+
 let golf1 = 0;
 let golf2 = 0;
 let golf3 = 0;
 
+setup();
 update();
 
 drawRect();
@@ -20,22 +25,22 @@ function drawRect() {
 
 }
 
-function drawStar(x_star, y_star, size, hue) {
-
-
+function drawStar(x, y, size) {
+    // Tekent de sterre,
+    context.strokeStyle = Utils.hsl(Math.random() * 60, 70, 70);
+    context.fillStyle = Utils.hsl(Math.random() * 60, 70, 70);
+    context.beginPath();
+    context.moveTo(x - size / 2, y);
+    context.lineTo(x, y - size);
+    context.lineTo(x + size / 2, y);
+    context.lineTo(x, y + size);
+    context.closePath();
+    context.fill();
+    context.stroke();
 }
 
 drawNoorderlicht();
 function drawNoorderlicht() {
-    //Tekent de sterren.
-    for (let i = 0; i <= 150; i++) {
-        let x_star = Math.random() * width + 35;
-        let y_star = Math.random() * height + 35;
-        context.fillStyle = "white";
-        Utils.fillCircle(x_star, y_star, 2);
-        drawStar(x_star, y_star, 20, 40);
-    }
-
     // Zorgt voor cirkels die naast elkaar getekend worden. Moet het noorderlicht voorstellen.
     for (let i = 0; i < width + 80; i++) {
         context.fillStyle = context.fillStyle = Utils.hsla(Math.random() * 30 - i, 100, 50, 100);
@@ -47,7 +52,7 @@ function drawNoorderlicht() {
 
 drawGolven();
 function drawGolven() {
-    // Zorgt voor de golven van de oceaan.
+    // Zorgt voor de golven van de oceaan
     // First golf
     for (let i = 0; i < width; i++) {
         context.fillStyle = context.fillStyle = "#7fcdff";
@@ -72,13 +77,34 @@ function drawGolven() {
 
 }
 
+function setup() {
+    // De setup voor de sterren
+    for (let i = 0; i < 50; i++) {
+        xPositions[i] = Utils.randomNumber(0, width);
+        yPositions[i] = Utils.randomNumber(0, height);
+        starSize[i] = Utils.randomNumber(0, 20);
+    }
+}
+
 function update() {
+    // Tekent in het begin elke keer een zwarte achtergrond
     drawRect();
+
+    // Tekent telkens de sterren op een willekeurig plek
+    for (let i = 0; i < 50; i++) {
+        drawStar(xPositions[i], yPositions[i], starSize[i]);
+    }
+
+    // Tekent telkens het noorderlicht
     drawNoorderlicht();
+
+    // Tekent telkens de golven + animeert ze
     drawGolven();
     golf1 += 0.1;
     golf2 += 0.2;
     golf3 += 0.3;
+
+    // Zorgt ervoor dat het geanimeerd wordt
     requestAnimationFrame(update);
 }
 
