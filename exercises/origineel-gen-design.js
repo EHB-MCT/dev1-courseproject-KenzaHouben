@@ -6,54 +6,16 @@ import * as Noise from "../../scripts/noise.js";
 let width = context.canvas.width;
 let height = context.canvas.height;
 
-// let xPositions = [];
-// let yPositions = [];
-// let starSize = [];
+let xPositions = [];
+let yPositions = [];
+let starSize = [];
 
 let golf1 = 0;
 let golf2 = 0;
 let golf3 = 0;
 
-let stars = [];
-
 setup();
 update();
-
-function setup() {
-    // De setup voor de sterren
-    for (let i = 0; i < 30; i++) {
-        let star = {
-            xPosition: Utils.randomNumber(0, width),
-            yPosition: Utils.randomNumber(0, height),
-            starSize: Utils.randomNumber(0, 20)
-        };
-        stars.push(star);
-    }
-}
-
-function update() {
-    // Tekent in het begin elke keer een zwarte achtergrond
-    drawRect();
-
-    // Tekent telkens de sterren op een willekeurig plek
-    for (let i = 0; i < stars.length; i++) {
-        drawStar(stars[i].xPosition, stars[i].yPosition, stars[i].starSize);
-        stars[i].xPosition += Utils.randomNumber(-2, 2);
-        stars[i].yPositions += Utils.randomNumber(-2, 2);
-    }
-
-    // Tekent telkens het noorderlicht
-    drawNoorderlicht();
-
-    // Tekent telkens de golven + animeert ze
-    drawGolven();
-    golf1 += 0.1;
-    golf2 += 0.2;
-    golf3 += 0.3;
-
-    // Zorgt ervoor dat het geanimeerd wordt
-    requestAnimationFrame(update);
-}
 
 drawRect();
 function drawRect() {
@@ -109,6 +71,39 @@ function drawGolven() {
         let y = Noise.perlinNoise(i / 600 + golf3) * 400 + 710;
         context.fillRect(i, y, 10, height);
     }
+}
+
+function setup() {
+    // De setup voor de sterren
+    for (let i = 0; i < 50; i++) {
+        xPositions[i] = Utils.randomNumber(0, width);
+        yPositions[i] = Utils.randomNumber(0, height);
+        starSize[i] = Utils.randomNumber(0, 20);
+    }
+}
+
+function update() {
+    // Tekent in het begin elke keer een zwarte achtergrond
+    drawRect();
+
+    // Tekent telkens de sterren op een willekeurig plek
+    for (let i = 0; i < 50; i++) {
+        drawStar(xPositions[i], yPositions[i], starSize[i]);
+        // xPositions[i] += Utils.randomNumber();
+        // yPositions[i] += Utils.randomNumber();
+    }
+
+    // Tekent telkens het noorderlicht
+    drawNoorderlicht();
+
+    // Tekent telkens de golven + animeert ze
+    drawGolven();
+    golf1 += 0.1;
+    golf2 += 0.2;
+    golf3 += 0.3;
+
+    // Zorgt ervoor dat het geanimeerd wordt
+    requestAnimationFrame(update);
 }
 
 // window.onwheel -> om te scrollen
