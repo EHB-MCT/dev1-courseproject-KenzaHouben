@@ -107,14 +107,16 @@ function drawGolven() {
 function scrollMovement(e) {
     // Noorderlicht
 
-    if (waveH < 550 && waveH > 50) {
-        waveH += e.deltaY;
-        console.log(e.deltaY);
-    }
+    // if (waveH < 550 && waveH > 50) {
+    //     waveH += e.deltaY;
+    //     console.log(e.deltaY);
+    // }
 
     if (northL < 550 && northL > 50) {
         northL += e.deltaY;
         console.log(e.deltaY);
+    } else {
+        northL += e.deltaY;
     }
 }
 
