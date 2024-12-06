@@ -8,13 +8,19 @@ let height = context.canvas.height;
 let golf1a = 0;
 let golf1b = 0;
 let stars = [];
+let waveH = 400;
+let northL = 400;
+
 
 setup();
 update();
 
+window.onwheel = scrollMovement;
+window.onmousemove = mouseMovement;
+
 function setup() {
     // De setup voor de sterren
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 45; i++) {
         let star = {
             xPosition: Utils.randomNumber(0, width),
             yPosition: Utils.randomNumber(0, height),
@@ -34,6 +40,7 @@ function update() {
         stars[i].xPosition += Utils.randomNumber(-5, -1);
         stars[i].yPositions += Utils.randomNumber(-2, 2);
         if (stars[i].xPosition < 0) {
+            // Zorgt ervoor dat de sterren terug beginnen in het begin op een natuurlijke manier
             stars[i].xPosition = width + 10;
             stars[i].yPosition = Utils.randomNumber(0, height);
         }
@@ -75,7 +82,7 @@ function drawNoorderlicht() {
     for (let i = 0; i < width + 80; i++) {
         context.strokeStyle = "black";
         context.fillStyle = Utils.hsla(Math.random() * 30 - i, 100, 50, 100);
-        let y = Noise.perlinNoise(i / 600) * 400 + 110;
+        let y = Noise.perlinNoise(i / 600) * northL + 110;
         Utils.fillAndStrokeCircle(i, y, 80, height);
     }
 }
@@ -86,12 +93,39 @@ function drawGolven() {
     for (let j = 0; j < 4; j++) {
         context.fillStyle = Utils.hsl(210, 50, 30 + j * 10);
         for (let i = 0; i < width; i++) {
-            let y = Noise.perlinNoise(i / 600 + golf1a + j * 100) * 400 + 510 + j * 50;
+            let y = Noise.perlinNoise(i / 600 + golf1a + j * 100) * waveH + 510 + j * 50;
             y += Noise.perlinNoise(i / 300 + golf1b) * 100;
             context.fillRect(i, y, 10, height);
         }
     }
 }
 
-// window.onwheel -> om te scrollen
-// vragen wat er bedoeld wordt met signature
+/**
+ * 
+ * @param {WheelEvent} e 
+ */
+function scrollMovement(e) {
+    // Noorderlicht
+
+    if (waveH < 550 && waveH > 50) {
+        waveH += e.deltaY;
+        console.log(e.deltaY);
+    }
+
+    if (northL < 550 && northL > 50) {
+        northL += e.deltaY;
+        console.log(e.deltaY);
+    }
+}
+
+/**
+ * 
+ * @param {MouseEvent} e 
+ */
+function mouseMovement(e) {
+    //golven
+
+}
+
+
+// signature -> space invader
