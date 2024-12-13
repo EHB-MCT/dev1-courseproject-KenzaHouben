@@ -10,6 +10,7 @@ let golf1b = 0;
 let stars = [];
 let waveH = 400;
 let northL = 400;
+let offSet = 0;
 
 
 setup();
@@ -51,6 +52,9 @@ function update() {
     drawGolven();
     golf1a += 0.01;
     golf1b += 0.05;
+
+    // space invader hier oproepen
+
     // Zorgt ervoor dat het geanimeerd wordt
     requestAnimationFrame(update);
 }
@@ -81,8 +85,8 @@ function drawNoorderlicht() {
     // Zorgt voor cirkels die naast elkaar getekend worden. Moet het noorderlicht voorstellen.
     for (let i = 0; i < width + 80; i++) {
         context.strokeStyle = "black";
-        context.fillStyle = Utils.hsla(Math.random() * 30 - i, 100, 50, 100);
-        let y = Noise.perlinNoise(i / 600) * northL + 110;
+        context.fillStyle = Utils.hsla(Math.random() * 30 - i + offSet * 500, 100, 50, 100);
+        let y = Noise.perlinNoise(i / 600 + offSet) * northL + 110;
         Utils.fillAndStrokeCircle(i, y, 80, height);
     }
 }
@@ -106,16 +110,12 @@ function drawGolven() {
  */
 function scrollMovement(e) {
     // Noorderlicht
-
-    // if (waveH < 550 && waveH > 50) {
-    //     waveH += e.deltaY;
-    //     console.log(e.deltaY);
-    // }
-
-    if (northL < 550 && northL > 50) {
+    console.log(northL + " --- " + e.deltaY);
+    if (northL >= 550 && e.deltaY < 0) {
         northL += e.deltaY;
-        console.log(e.deltaY);
-    } else {
+    } else if (northL <= 50 && e.deltaY > 0) {
+        northL += e.deltaY;
+    } else if (northL > 50 && northL < 550) {
         northL += e.deltaY;
     }
 }
@@ -125,9 +125,10 @@ function scrollMovement(e) {
  * @param {MouseEvent} e 
  */
 function mouseMovement(e) {
-    //golven
+    console.log(e.pageX);
+    // Noorderlicht
+    offSet = e.pageX / 1000;
+    // Golven
+    waveH = e.pageY - 200;
 
 }
-
-
-// signature -> space invader
